@@ -1,0 +1,2 @@
+# NetScan - CLI Network Utilities Toolkit
+# No external dependencies required! Pure Python standard library.
