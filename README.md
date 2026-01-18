@@ -408,9 +408,13 @@ Found a bug? Have a feature idea? Contributions welcome!
 
 ---
 
-## 🎖️ Credits
+## 🙏 Credits
 
-Created by Randell Logan Smith and Team Brain as part of the Holy Grail Automation project.
+Created by **Randell Logan Smith and Team Brain** at [Metaphy LLC](https://metaphysicsandcomputing.com)
+
+Part of the HMSS (Heavenly Morning Star System) ecosystem.
+
+---
 
 **Technology:**
 - Python 3.6+
