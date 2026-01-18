@@ -410,7 +410,7 @@ Found a bug? Have a feature idea? Contributions welcome!
 
 ## 🎖️ Credits
 
-Created as part of the Holy Grail Automation project.
+Created by Randell Logan Smith and Team Brain as part of the Holy Grail Automation project.
 
 **Technology:**
 - Python 3.6+
