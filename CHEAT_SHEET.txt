@@ -1,0 +1,287 @@
+================================================================================
+NETSCAN CHEAT SHEET
+================================================================================
+CLI Network Utilities Toolkit - Port scanning, ping, DNS lookup, and more
+Zero dependencies | Cross-platform | Python 3.6+
+================================================================================
+
+QUICK START
+-----------
+1. Navigate to NetScan folder
+2. Run: python netscan.py --help
+3. Basic usage: python netscan.py <command> [options]
+
+================================================================================
+PORT SCANNING
+--------------------------------------------------------------------------------
+
+Check Single Port:
+  netscan port <host> <port>
+  netscan port example.com 80
+  netscan port 192.168.1.1 22
+  netscan port localhost 8080 --timeout 5
+
+Scan Common Ports (19 ports):
+  netscan ports <host>
+  netscan ports example.com
+  netscan ports myserver.com --timeout 1
+
+Scan Port Range:
+  netscan ports <host> --range <start>-<end>
+  netscan ports example.com --range 1-1000
+  netscan ports target.com --range 1-65535 --threads 200
+
+Scan Specific Ports:
+  netscan ports <host> --list <port1,port2,...>
+  netscan ports example.com --list 22,80,443,3306,5432
+
+Performance Options:
+  --timeout <seconds>     Connection timeout (default: 2)
+  --threads <count>       Concurrent threads (default: 100)
+
+================================================================================
+CONNECTIVITY TESTING
+--------------------------------------------------------------------------------
+
+Ping Host:
+  netscan ping <host>
+  netscan ping google.com
+  netscan ping 8.8.8.8
+  netscan ping api.example.com --count 10
+
+Traceroute:
+  netscan trace <host>
+  netscan trace google.com
+  netscan trace example.com --hops 20
+
+================================================================================
+DNS OPERATIONS
+--------------------------------------------------------------------------------
+
+DNS Lookup (hostname -> IP):
+  netscan dns <host>
+  netscan dns google.com
+  netscan dns api.github.com
+
+Reverse DNS (IP -> hostname):
+  netscan rdns <ip>
+  netscan rdns 8.8.8.8
+  netscan rdns 140.82.112.4
+
+Local IP Information:
+  netscan local
+  # Shows: Hostname, Local IP address
+
+================================================================================
+NETWORK SCANNING
+--------------------------------------------------------------------------------
+
+Scan Local Network:
+  netscan scan <network_prefix>
+  netscan scan 192.168.1
+  netscan scan 10.0.0
+  netscan scan 172.16.0 --timeout 0.5
+
+Finding Your Network Prefix:
+  1. Run: netscan local
+  2. Use first 3 octets (e.g., 192.168.1.100 -> 192.168.1)
+
+================================================================================
+COMMON PORTS REFERENCE
+--------------------------------------------------------------------------------
+
+Web Services:
+  80    HTTP
+  443   HTTPS
+  8080  HTTP Alt
+  8443  HTTPS Alt
+
+Remote Access:
+  22    SSH
+  23    Telnet
+  3389  RDP (Windows)
+  5900  VNC
+
+Databases:
+  3306  MySQL
+  5432  PostgreSQL
+  27017 MongoDB
+  6379  Redis
+
+Email:
+  25    SMTP
+  110   POP3
+  143   IMAP
+
+File Sharing:
+  20    FTP Data
+  21    FTP Control
+  445   SMB
+
+DNS:
+  53    DNS
+
+================================================================================
+PYTHON API
+--------------------------------------------------------------------------------
+
+Import:
+  from netscan import NetScan, COMMON_PORTS
+
+Initialize:
+  ns = NetScan()
+
+Scan Single Port:
+  is_open = ns.scan_port("example.com", 80)
+  is_open = ns.scan_port("host", 443, timeout=1)
+
+Scan Multiple Ports:
+  results = ns.scan_ports("host", [80, 443, 22])
+  results = ns.scan_ports("host", ports, timeout=1, threads=50)
+  # Returns: {80: True, 443: True, 22: False}
+
+DNS Operations:
+  ip = ns.dns_lookup("google.com")
+  hostname = ns.reverse_dns("8.8.8.8")
+  local_ip = ns.get_local_ip()
+
+Ping:
+  success, output = ns.ping("google.com", count=4)
+
+Traceroute:
+  output = ns.traceroute("google.com", max_hops=30)
+
+Network Scan:
+  hosts = ns.scan_network("192.168.1", timeout=0.5)
+  # Returns: ["192.168.1.1", "192.168.1.5", ...]
+
+================================================================================
+PERFORMANCE TIPS
+--------------------------------------------------------------------------------
+
+Fast Port Scan:
+  netscan ports host --timeout 0.5 --threads 200
+
+Thorough Scan (slow networks):
+  netscan ports host --timeout 3 --threads 20
+
+Quick Network Discovery:
+  netscan scan 192.168.1 --timeout 0.3
+
+Full Port Range (takes time!):
+  netscan ports host --range 1-65535 --timeout 0.5 --threads 200
+
+================================================================================
+TROUBLESHOOTING
+--------------------------------------------------------------------------------
+
+"Port is CLOSED or FILTERED"
+  -> Service not running, or firewall blocking
+  -> Try: netscan ping <host> first to verify connectivity
+
+"Could not resolve hostname"
+  -> DNS issue
+  -> Try: netscan dns <host> to check resolution
+  -> Check your DNS settings
+
+"Timeout" errors
+  -> Increase timeout: --timeout 5
+  -> Check network connectivity
+
+Slow scans:
+  -> Reduce timeout: --timeout 0.5
+  -> Increase threads: --threads 200
+  -> Use --list for specific ports
+
+================================================================================
+COMMON WORKFLOWS
+--------------------------------------------------------------------------------
+
+Server Health Check:
+  netscan port webserver.com 80
+  netscan port webserver.com 443
+  netscan port dbserver.com 3306
+
+Debug Connection Issue:
+  1. netscan dns api.example.com      # Check DNS
+  2. netscan ping api.example.com     # Check connectivity
+  3. netscan port api.example.com 443 # Check port
+  4. netscan trace api.example.com    # Trace route
+
+Find Devices on Network:
+  netscan local                       # Get your IP
+  netscan scan 192.168.1              # Scan network
+
+Pre-Deployment Check:
+  netscan ports loadbalancer.com --list 80,443
+  netscan port database.com 5432
+  netscan port cache.com 6379
+
+================================================================================
+INTEGRATION WITH OTHER TOOLS
+--------------------------------------------------------------------------------
+
+With SynapseLink (Team Brain):
+  from synapselink import quick_send
+  from netscan import NetScan
+  
+  ns = NetScan()
+  is_open = ns.scan_port("server", 80)
+  quick_send("TEAM", "Server Check", f"Port 80: {is_open}")
+
+With AgentHealth:
+  from agenthealth import AgentHealth
+  from netscan import NetScan
+  
+  health = AgentHealth()
+  ns = NetScan()
+  
+  # Check infrastructure before task
+  if ns.scan_port("api.example.com", 443):
+      health.start_session("ATLAS", task="API Integration")
+
+With ToolRegistry:
+  # NetScan is registered as a network diagnostics tool
+  # Use ToolRegistry to discover and invoke
+
+================================================================================
+RESPONSIBLE USE
+--------------------------------------------------------------------------------
+
+DO:
+  [OK] Scan your own servers
+  [OK] Scan your local network
+  [OK] Troubleshoot connectivity issues
+  [OK] Verify your security posture
+
+DON'T:
+  [X] Scan networks you don't own
+  [X] Scan without permission
+  [X] Use for malicious purposes
+  [X] Violate laws or terms of service
+
+================================================================================
+RESOURCES
+--------------------------------------------------------------------------------
+
+Documentation:    AutoProjects/NetScan/README.md
+Examples:         AutoProjects/NetScan/EXAMPLES.md
+Integration:      AutoProjects/NetScan/INTEGRATION_PLAN.md
+Quick Starts:     AutoProjects/NetScan/QUICK_START_GUIDES.md
+GitHub:           https://github.com/DonkRonk17/NetScan
+Issues:           https://github.com/DonkRonk17/NetScan/issues
+
+================================================================================
+CREDITS
+--------------------------------------------------------------------------------
+
+Built by:         Team Brain (FORGE)
+For:              Logan Smith / Metaphy LLC
+License:          MIT License
+Dependencies:     Zero (Python stdlib only)
+Python:           3.6+
+Platforms:        Windows, Linux, macOS
+
+================================================================================
+Network troubleshooting made simple.
+================================================================================

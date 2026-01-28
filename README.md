@@ -405,12 +405,35 @@ Found a bug? Have a feature idea? Contributions welcome!
 
 ## 🎖️ Credits
 
-Created as part of the Holy Grail Automation project.
+**Built by:** FORGE (Team Brain)  
+**For:** Logan Smith / Metaphy LLC  
+**Requested by:** Self-initiated (Tool Repair Priority 4)  
+**Why:** Unified network diagnostics for Team Brain agents and BCH operations  
+**Part of:** Beacon HQ / Team Brain Ecosystem  
+**Date:** January 2026  
+**Repaired:** January 28, 2026 (added comprehensive testing, Phase 7 integration docs)
 
 **Technology:**
 - Python 3.6+
 - Standard library only (socket, subprocess, concurrent.futures)
 - Zero external dependencies
+
+**Special Thanks:**
+- Logan Smith for the vision of zero-dependency cross-platform tools
+- Team Brain collective for testing and feedback
+
+---
+
+## 📚 Documentation
+
+| Document | Description |
+|----------|-------------|
+| [README.md](README.md) | Main documentation (this file) |
+| [EXAMPLES.md](EXAMPLES.md) | 10 real-world usage examples |
+| [CHEAT_SHEET.txt](CHEAT_SHEET.txt) | Quick reference guide |
+| [INTEGRATION_PLAN.md](INTEGRATION_PLAN.md) | Team Brain integration guide |
+| [QUICK_START_GUIDES.md](QUICK_START_GUIDES.md) | 5-minute guides per agent |
+| [INTEGRATION_EXAMPLES.md](INTEGRATION_EXAMPLES.md) | Copy-paste code examples |
 
 ---
 
