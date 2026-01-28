@@ -1,3 +1,5 @@
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/153708b1-cab5-4809-bfa3-14c36ee47931" />
+
 # 🌐 NetScan - CLI Network Utilities Toolkit
 
 **Simple. Fast. Unified.**
@@ -391,6 +393,9 @@ MIT License - see LICENSE file for details.
 
 ---
 
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/d220209a-afe9-4ee9-895b-ee01d56489fb" />
+
+
 ## 🤝 Contributing
 
 Found a bug? Have a feature idea? Contributions welcome!
@@ -403,7 +408,7 @@ Found a bug? Have a feature idea? Contributions welcome!
 
 ---
 
-## 🎖️ Credits
+## 🙏 Credits
 
 **Built by:** FORGE (Team Brain)  
 **For:** Logan Smith / Metaphy LLC  
